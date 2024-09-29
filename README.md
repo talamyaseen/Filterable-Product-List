@@ -1,0 +1,1 @@
+A simple web application that displays a list of products with a filterable feature, allowing users to filter products by category. This project is built in two phases: the first uses HTML, CSS, and JavaScript, while the second converts the app to React.js for state management and dynamic rendering of the product list.
