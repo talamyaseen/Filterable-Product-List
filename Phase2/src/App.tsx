@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import ProductList from "./components/ProductList";
+import FilterButton from "./components/FilterButton";
 function App() {
   const products = [
     { name: "Phone", category: "Electronics", price: 1000 },
@@ -12,32 +13,35 @@ function App() {
   const handelClick = (category: string) => {
     setSelectedFilter(category);
   };
-  const [selectedFilter, setSelectedFilter] = useState<string>("");
-  useState;
+
+  const [selectedFilter, setSelectedFilter] = useState<string>("All");
+
+  const filteredProducts =
+    selectedFilter === "All"
+      ? products
+      : products.filter((product) => product.category === selectedFilter);
+
   return (
     <>
       <h1>Product List</h1>
       <div className="filter-buttons">
-        <button
-          className={selectedFilter === "All" ? "active" : ""}
-          onClick={() => handelClick("All")}
-        >
-          All
-        </button>
-        <button
-          className={selectedFilter === "Electronics" ? "active" : ""}
-          onClick={() => handelClick("Electronics")}
-        >
-          Electronics
-        </button>
-        <button
-          className={selectedFilter === "Clothing" ? "active" : ""}
-          onClick={() => handelClick("Clothing")}
-        >
-          Clothing
-        </button>
+        <FilterButton
+          category="All"
+          isSelected={selectedFilter === "All"}
+          onClick={handelClick}
+        />
+        <FilterButton
+          category="Electronics"
+          isSelected={selectedFilter === "Electronics"}
+          onClick={handelClick}
+        />
+        <FilterButton
+          category="Clothing"
+          isSelected={selectedFilter === "Clothing"}
+          onClick={handelClick}
+        />
       </div>
-      <ProductList products={[]} />
+      <ProductList products={filteredProducts} />
     </>
   );
 }
